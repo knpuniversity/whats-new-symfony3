@@ -1,0 +1,15 @@
+title:  "What's new in Symfony 3.0"
+summary: |
+    Summary goes here
+
+illustration: new-sf3.png
+
+tuts_hero:
+    start_step: ''
+    finish_step: ''
+
+chapters:
+    dir-structure:
+        is_finished: false
+    guard:
+        is_finished: false
