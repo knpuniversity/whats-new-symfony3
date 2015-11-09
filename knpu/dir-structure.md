@@ -1,3 +1,5 @@
+# Directory Structure
+
 Hi guys!  Symfony 3 is around the corner and it's time to talk about all the new cool shiny stuff we're getting!  
 But first, I have to be honest with you, Symfony 3 actually gives us nothing new, and this is a really good thing. And I'll talk about it more when we talk about upgrading Symfony 3.  But technically Symfony 2.8 and Symfony 3 have the exact same features.  So if you upgraded Symfony 2.8 you're gonna have everything.  And they also come out on the exact same day.
 
