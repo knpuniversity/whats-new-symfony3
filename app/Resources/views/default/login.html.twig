@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey|trans(error.messageData) }}
+        </div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="POST">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" name="_username" class="form-control" id="exampleInputEmail1" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="_password" class="form-control"
+                   id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="the-answer">The answer to life the universe and everything</label>
+            <input type="text" name="the_answer" class="form-control" id="the-answer">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="terms"> I agree to want to be logged in
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default">Login</button>
+    </form>
+{% endblock %}

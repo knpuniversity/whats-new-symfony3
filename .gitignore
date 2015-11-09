@@ -1,0 +1,9 @@
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/sessions/.gitkeep
+/vendor/
+/web/bundles/

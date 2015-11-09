@@ -1,0 +1,25 @@
+{
+    "steps": [
+        {
+            "id": "start",
+            "name": "start",
+            "description": null
+        },
+        {
+            "id": "guard-add-blank-authenticator",
+            "name": "Guard: Add blank authenticator",
+            "description": null
+        },
+        {
+            "id": "guard-complete-authenticator",
+            "name": "Guard: Complete authenticator",
+            "description": null
+        },
+        {
+            "id": "guard-custom-messages",
+            "name": "Guard: Custom messages",
+            "description": null
+        }
+    ],
+    "sha": "81ce4dee856f4ae03a74bb8d4f26a01403b4b4e0"
+}

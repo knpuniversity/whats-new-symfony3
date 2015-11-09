@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="{{ path('homepage') }}">Home</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li role="presentation"><a href="{{ path('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li role="presentation"><a href="{{ path('login') }}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <h3 class="text-muted">Symfony 3!</h3>
+        </div>
+
+        {% block body %}{% endblock %}
+        <footer class="footer">
+            <p>&copy; KnpUniversity! 2015</p>
+        </footer>
+
+    </div>
+    <!-- /container -->
+    {% block javascripts %}{% endblock %}
+    </body>
+</html>
