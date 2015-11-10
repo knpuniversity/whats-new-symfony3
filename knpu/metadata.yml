@@ -9,7 +9,7 @@ tuts_hero:
     finish_step: ''
 
 chapters:
-    dir-structure:
+    new-dir-structure:
         is_finished: false
     guard:
         is_finished: false
