@@ -23,15 +23,16 @@ Try out `/login`.
 ## Creating the Authenticator Class
 
 To use guard, we need a new class. I'll create a new directory called `Security`,
-bit that's not important. Call the class `WeirdFormLoginAuthenticator`. Next, make
+but that's not important. Call the class `WeirdFormLoginAuthenticator`. Next, make
 this class implement `GuardAuthenticatorInterface` or extend the slightly easier
 `AbstractGuardAuthenticator`.
 
-Your job is simple: fill in each of these methods. In PhpStorm, I'll open the
-[generate menu](http://knpuniversity.com/screencast/phpstorm/doctrine) and select
-"Implement Methods". Selct *all* of them, including `start()`, which is hiding at
-the bottom. Also move the `start()` method to the bottom of the class: it'll fit
-more thematically down there.
+In PhpStorm, I'll open the [generate menu](http://knpuniversity.com/screencast/phpstorm/doctrine)
+and select "Implement Methods". Selct *all* of them, including `start()`, which is
+hiding at the bottom. Also move the `start()` method to the bottom of the class:
+it'll fit more thematically down there.
+
+Your job is simple: fill in each of these methods. 
 
 ## getCredentials()
 

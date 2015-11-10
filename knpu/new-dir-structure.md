@@ -48,16 +48,16 @@ So, how can we upgrade *our* project from the old structure to this one? And do 
 
 Actually, no: this new structure has *always* been possible. In fact, open up `AppKernel`.
 The *only* reason the new structure works is because the `getCacheDir()` and `getLogDir()`
-have been overridden. If you don't override these, they default to using `cache/`
+methods have been overridden. If you don't override these, they default to using `cache/`
 and `logs/` in *this* directory: `app/`.
 
-So your project, if you override these then... boom! You're using the new directory
+So in your project, if you override these then... boom! You're using the new directory
 structure. Well, you'll also want to move the `console` file and a few other things.
 I'll talk about upgrading later.
 
 And if you *don't* want to use the new directory structure... then boom! Don't use
 it. You're free to organize things however you want. Just be aware that the Symfony
-documentation will be reference things like the `var/console` and `var/cache` and
+documentation will be reference things like the `bin/console` and `var/cache` and
 you'll need to translate to what that means in your app.
 
 ## New Tests Paths
