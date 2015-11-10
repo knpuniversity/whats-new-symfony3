@@ -48,9 +48,9 @@ called on the authenticator.
 
 Below that, return an array that contains any credential information we need. Add
 a `username` key set to `$request->request->get('_username')`: that's the name of
-the field in the form. Repeat that for password and `answer`. In the form, "answer"
-is called `the_answer` and the last is called `terms`. Finish the array by fetching
-`the_answer` and and `terms.`
+the field in the form. Repeat that for password and `answer`. In the form, answer's
+name is `the_answer` and the last is named `terms`. Finish the array by fetching
+`the_answer` and `terms.`
 
 The keys on the right are obviously the names of the submitted form fields. The keys
 on the left can be anything: you'll see how to use them soon.
@@ -61,7 +61,7 @@ If `getCredentials()` returns a non-null value, then `getUser()` is called next.
 I have a really simple `User` entity that has basically just one field: `username`.
 I'm not even storing a password. Whatever your situation, just make sure you have
 a `User` class that implements `UserInterface` *and* a "user provider" for it that's
-configured in `services.yml`.
+configured in `security.yml`.
 
 See the `$credentials` variable? That's equal to whatever you returned from `getCredentials()`.
 Set a new `$username` variable by grabbing the `username` key from it.
@@ -81,7 +81,7 @@ If `getUser()` *does* return a User, `checkCredentials()` is called. This is whe
 you check if the password is valid or anything else to determine that the authentication
 request is legitimate.
 
-And surprsie! The `$credentials` argument is once again what you returned from `getCredentials()`.
+And surprise! The `$credentials` argument is once again what you returned from `getCredentials()`.
 
 Let's check a few things. First, the user doesn't have a password stored in the database.
 In my system, the password for everybody is the same: `symfony3`. If it doesn't equal
@@ -105,7 +105,7 @@ so we can show it to the user. For the key, use the constant: `Security::AUTHENT
 This is *exactly* what the normal form login system does: it adds an error to this
 same key on the session. 
 
-In the controller, the `security.authentication.utils` reads this key from the session
+In the controller, the `security.authentication.utils` service reads this key from the session
 when you call `getLastAuthenticationError()`.
 
 Other than storing the error, what we *really* want to do when authenticaiton fails
@@ -113,8 +113,8 @@ is redirect back to the login page. To do this, add the `Router` as an argument 
 the constructor and use that to set a new property. I'll do that with a
 [shortcut](http://knpuniversity.com/screencast/phpstorm/service-shortcuts#generating-constructor-properties).
 
-Now it's simple: `$url = $this->router->generate()` and pass it `login` - that route
-name to my login page. Then, return a `new RedirectResponse`.
+Now it's simple: `$url = $this->router->generate()` and pass it `login` - that's the
+route name to my login page. Then, return a `new RedirectResponse`.
 
 ### onAuthenticationSuccess()
 
@@ -130,12 +130,12 @@ login as an anonymous user. For this situation, redirect them to the login page.
 ### supportsRememberMe()
 
 Finally, if you want to be able to support remember me functionality, return true
-from `supportsRememberMe()`. You'll still need to configure the `rememberme` key
+from `supportsRememberMe()`. You'll still need to configure the `remember_me` key
 in the firewall.
 
 ## Configuring the Authenticator
 
-That's it! Telling Symfony about the authenticator involves just two more steps. The
+That's it! Now we need to tell Symfony about the authentication with two steps. The
 first shouldn't surprise you: register this as a service. In `services.yml` create
 a new service - how about `weird_authenticator`. The class is `WeirdFormLoginAuthenticator`
 and there are two arguments: the entity manager and the router.
