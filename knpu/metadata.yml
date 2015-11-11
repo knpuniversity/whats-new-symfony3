@@ -1,12 +1,15 @@
-title:  "What's new in Symfony 3.0"
+title:  "The new Awesome of Symfony 3.0"
 summary: |
-    Summary goes here
+    HELLLOOO Symfony3!!!
 
-illustration: new-sf3.png
+    Symfony 3, ahem, Symfony 2.8, comes with *a lot* of sweet new stuff. Hey, we
+    should totally take a tour through all the best stuff.
+
+# illustration: new-sf3.png
 
 tuts_hero:
-    start_step: ''
-    finish_step: ''
+    start_step: 'start'
+    # finish_step: ''
 
 chapters:
     new-dir-structure:
