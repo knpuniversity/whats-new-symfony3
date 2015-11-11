@@ -5,7 +5,7 @@ summary: |
     Symfony 3, ahem, Symfony 2.8, comes with *a lot* of sweet new stuff. Hey, we
     should totally take a tour through all the best stuff.
 
-# illustration: new-sf3.png
+illustration: new-sf3.png
 
 tuts_hero:
     start_step: 'start'
