@@ -14,5 +14,5 @@ tuts_hero:
 chapters:
     new-dir-structure:
         is_finished: false
-    guard:
+    guard-authentication:
         is_finished: false
