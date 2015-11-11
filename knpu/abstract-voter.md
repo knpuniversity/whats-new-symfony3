@@ -1,0 +1,3 @@
+# AbstractVoter
+
+WIP!

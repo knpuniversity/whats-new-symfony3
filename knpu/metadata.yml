@@ -16,3 +16,17 @@ chapters:
         is_finished: false
     guard-authentication:
         is_finished: false
+    micro-kernel:
+        is_finished: false
+    profiler:
+        is_finished: false
+    autowiring:
+        is_finished: false
+    form-changes:
+        is_finished: false
+    console-styling:
+        is_finished: false
+    no-assetic:
+        is_finished: false
+    abstract-voter:
+        is_finished: false
