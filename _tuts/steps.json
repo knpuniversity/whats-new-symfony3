@@ -39,7 +39,27 @@
             "id": "microkernel-twig-sfwextra",
             "name": "MicroKernel: Twig & SFWExtra",
             "description": null
+        },
+        {
+            "id": "profiler-dump-exception",
+            "name": "Profiler: Dump & Exception",
+            "description": null
+        },
+        {
+            "id": "profiler-remove-dump",
+            "name": "Profiler: Remove dump",
+            "description": null
+        },
+        {
+            "id": "autowire-autowire-the-authenticator",
+            "name": "Autowire: Autowire the authenticator",
+            "description": null
+        },
+        {
+            "id": "autowire-auto-inject-non-service",
+            "name": "Autowire: Auto-inject non-service",
+            "description": null
         }
     ],
-    "sha": "ba33a1d9cdfd67c5501d9d5eaccedc856f3704eb"
+    "sha": "f7ce2b3c37ab146b59fc807a7426a50b73adb2ba"
 }

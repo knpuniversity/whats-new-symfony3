@@ -1,0 +1,49 @@
+diff --git a/src/AppBundle/Security/RandomSecurityRobot.php b/src/AppBundle/Security/RandomSecurityRobot.php
+new file mode 100644
+index 0000000..66afbbf
+--- /dev/null
++++ b/src/AppBundle/Security/RandomSecurityRobot.php
+@@ -0,0 +1,11 @@
++<?php
++
++namespace AppBundle\Security;
++
++class RandomSecurityRobot
++{
++    public function doesRobotAllowAccess()
++    {
++        return rand(0, 10) >= 5;
++    }
++}
+diff --git a/src/AppBundle/Security/WeirdFormAuthenticator.php b/src/AppBundle/Security/WeirdFormAuthenticator.php
+index f00dd2c..110a3b0 100644
+--- a/src/AppBundle/Security/WeirdFormAuthenticator.php
++++ b/src/AppBundle/Security/WeirdFormAuthenticator.php
+@@ -20,11 +20,13 @@ class WeirdFormAuthenticator extends AbstractGuardAuthenticator
+ {
+     private $em;
+     private $router;
++    private $robot;
+ 
+-    public function __construct(EntityManager $em, RouterInterface $router)
++    public function __construct(EntityManager $em, RouterInterface $router, RandomSecurityRobot $robot)
+     {
+         $this->em = $em;
+         $this->router = $router;
++        $this->robot = $robot;
+     }
+ 
+     public function getCredentials(Request $request)
+@@ -58,6 +60,12 @@ class WeirdFormAuthenticator extends AbstractGuardAuthenticator
+ 
+     public function checkCredentials($credentials, UserInterface $user)
+     {
++        if (!$this->robot->doesRobotAllowAccess()) {
++            throw new CustomUserMessageAuthenticationException(
++                'RANDOM SECURITY ROBOT SAYS NO!'
++            );
++        }
++
+         if ($credentials['password'] != 'symfony3') {
+             return false;
+         }

@@ -1,0 +1,11 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index 61db6ad..e43b5ae 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -6,4 +6,5 @@ parameters:
+ services:
+     weird_authenticator:
+         class: AppBundle\Security\WeirdFormAuthenticator
+-        arguments: ['@doctrine.orm.entity_manager', '@router']
++        # arguments: ['@doctrine.orm.entity_manager', '@router']
++        autowire: true

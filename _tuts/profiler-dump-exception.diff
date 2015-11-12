@@ -1,0 +1,15 @@
+diff --git a/src/AppBundle/Controller/DefaultController.php b/src/AppBundle/Controller/DefaultController.php
+index 2a66017..fab2ff8 100644
+--- a/src/AppBundle/Controller/DefaultController.php
++++ b/src/AppBundle/Controller/DefaultController.php
+@@ -27,6 +27,10 @@ class DefaultController extends Controller
+         $error = $this->get('security.authentication_utils')
+             ->getLastAuthenticationError();
+ 
++        dump($this->get('security.authentication_utils'));
++
++        throw new \Exception('Something went wrong!');
++
+         return $this->render('default/login.html.twig', [
+             'error' => $error
+         ]);
