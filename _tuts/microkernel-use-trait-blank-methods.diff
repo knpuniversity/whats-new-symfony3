@@ -1,0 +1,30 @@
+diff --git a/app/LittleKernel.php b/app/LittleKernel.php
+index 1ad8ca3..6a25261 100644
+--- a/app/LittleKernel.php
++++ b/app/LittleKernel.php
+@@ -1,7 +1,25 @@
+ <?php
+ 
++use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
++use Symfony\Component\Config\Loader\LoaderInterface;
++use Symfony\Component\DependencyInjection\ContainerBuilder;
++use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+ use Symfony\Component\HttpKernel\Kernel;
++use Symfony\Component\Routing\RouteCollectionBuilder;
+ 
+ class LittleKernel extends Kernel
+ {
++    use MicroKernelTrait;
++
++    public function registerBundles()
++    {
++    }
++
++    protected function configureRoutes(RouteCollectionBuilder $routes)
++    {
++    }
++
++    protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
++    {
++    }
+ }

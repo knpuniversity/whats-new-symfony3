@@ -1,0 +1,76 @@
+diff --git a/app/LittleKernel.php b/app/LittleKernel.php
+index 3a8e174..6edc227 100644
+--- a/app/LittleKernel.php
++++ b/app/LittleKernel.php
+@@ -1,7 +1,9 @@
+ <?php
+ 
++use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
+ use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+ use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
++use Symfony\Bundle\TwigBundle\TwigBundle;
+ use Symfony\Component\Config\Loader\LoaderInterface;
+ use Symfony\Component\DependencyInjection\ContainerBuilder;
+ use Symfony\Component\HttpFoundation\Response;
+@@ -16,7 +18,9 @@ class LittleKernel extends Kernel
+     public function registerBundles()
+     {
+         return [
+-            new FrameworkBundle()
++            new FrameworkBundle(),
++            new TwigBundle(),
++            new SensioFrameworkExtraBundle()
+         ];
+     }
+ 
+@@ -28,12 +32,20 @@ class LittleKernel extends Kernel
+     protected function configureRoutes(RouteCollectionBuilder $routes)
+     {
+         $routes->add('/hello/symfony/{version}', 'kernel:helloSymfony');
++
++        $annotationRoutes = $routes->import(
++            __DIR__.'/../src/AppBundle/Controller',
++            'annotation'
++        );
++        $routes->mount('/', $annotationRoutes);
+     }
+ 
+     protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
+     {
+         $c->loadFromExtension('framework', [
+             'secret' => 'micr0',
++            'templating' => ['engines' => ['twig']],
++            'assets' => []
+         ]);
+     }
+ }
+diff --git a/app/Resources/views/base.html.twig b/app/Resources/views/base.html.twig
+index 716a7e2..d8d3376 100644
+--- a/app/Resources/views/base.html.twig
++++ b/app/Resources/views/base.html.twig
+@@ -16,11 +16,7 @@
+             <nav>
+                 <ul class="nav nav-pills pull-right">
+                     <li role="presentation" class="active"><a href="{{ path('homepage') }}">Home</a></li>
+-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+-                        <li role="presentation"><a href="{{ path('logout') }}">Logout</a></li>
+-                    {% else %}
+-                        <li role="presentation"><a href="{{ path('login') }}">Login</a></li>
+-                    {% endif %}
++
+                 </ul>
+             </nav>
+             <h3 class="text-muted">Symfony 3!</h3>
+diff --git a/web/tiny.php b/web/tiny.php
+index fefb682..3bfbada 100644
+--- a/web/tiny.php
++++ b/web/tiny.php
+@@ -2,7 +2,7 @@
+ 
+ use Symfony\Component\HttpFoundation\Request;
+ 
+-require __DIR__.'/../vendor/autoload.php';
++require __DIR__.'/../app/autoload.php';
+ require __DIR__.'/../app/LittleKernel.php';
+ 
+ $kernel = new LittleKernel('dev', true);

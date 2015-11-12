@@ -1,0 +1,13 @@
+diff --git a/app/LittleKernel.php b/app/LittleKernel.php
+new file mode 100644
+index 0000000..1ad8ca3
+--- /dev/null
++++ b/app/LittleKernel.php
+@@ -0,0 +1,7 @@
++<?php
++
++use Symfony\Component\HttpKernel\Kernel;
++
++class LittleKernel extends Kernel
++{
++}

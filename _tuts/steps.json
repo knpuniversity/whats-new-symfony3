@@ -19,7 +19,27 @@
             "id": "guard-custom-messages",
             "name": "Guard: Custom messages",
             "description": null
+        },
+        {
+            "id": "microkernel-create-littlekernel",
+            "name": "MicroKernel: Create LittleKernel",
+            "description": null
+        },
+        {
+            "id": "microkernel-use-trait-blank-methods",
+            "name": "MicroKernel: Use trait, blank methods",
+            "description": null
+        },
+        {
+            "id": "microkernel-fill-in-methods-fc",
+            "name": "MicroKernel: Fill in methods + FC",
+            "description": null
+        },
+        {
+            "id": "microkernel-twig-sfwextra",
+            "name": "MicroKernel: Twig & SFWExtra",
+            "description": null
         }
     ],
-    "sha": "31c90e5cd254047e7f475aa80e9763dce7d3bf81"
+    "sha": "ba33a1d9cdfd67c5501d9d5eaccedc856f3704eb"
 }

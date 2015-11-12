@@ -1,0 +1,59 @@
+diff --git a/app/LittleKernel.php b/app/LittleKernel.php
+index 6a25261..3a8e174 100644
+--- a/app/LittleKernel.php
++++ b/app/LittleKernel.php
+@@ -1,8 +1,10 @@
+ <?php
+ 
++use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+ use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+ use Symfony\Component\Config\Loader\LoaderInterface;
+ use Symfony\Component\DependencyInjection\ContainerBuilder;
++use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+ use Symfony\Component\HttpKernel\Kernel;
+ use Symfony\Component\Routing\RouteCollectionBuilder;
+@@ -13,13 +15,25 @@ class LittleKernel extends Kernel
+ 
+     public function registerBundles()
+     {
++        return [
++            new FrameworkBundle()
++        ];
++    }
++
++    public function helloSymfony($version)
++    {
++        return new Response('Hi Symfony version '.$version);
+     }
+ 
+     protected function configureRoutes(RouteCollectionBuilder $routes)
+     {
++        $routes->add('/hello/symfony/{version}', 'kernel:helloSymfony');
+     }
+ 
+     protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
+     {
++        $c->loadFromExtension('framework', [
++            'secret' => 'micr0',
++        ]);
+     }
+ }
+diff --git a/web/tiny.php b/web/tiny.php
+new file mode 100644
+index 0000000..fefb682
+--- /dev/null
++++ b/web/tiny.php
+@@ -0,0 +1,12 @@
++<?php
++
++use Symfony\Component\HttpFoundation\Request;
++
++require __DIR__.'/../vendor/autoload.php';
++require __DIR__.'/../app/LittleKernel.php';
++
++$kernel = new LittleKernel('dev', true);
++$request = Request::createFromGlobals();
++$response = $kernel->handle($request);
++$response->send();
++$kernel->terminate($request, $response);
