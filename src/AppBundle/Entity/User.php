@@ -23,7 +23,7 @@ class User implements UserInterface
      */
     private $username;
 
-    public function __construct($username)
+    public function __construct($username = null)
     {
         $this->username = $username;
     }
@@ -46,5 +46,10 @@ class User implements UserInterface
     }
     public function eraseCredentials()
     {
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
     }
 }
