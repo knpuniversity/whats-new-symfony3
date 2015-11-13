@@ -1,14 +1,14 @@
-diff --git a/src/AppBundle/Security/RandomSecurityRobot.php b/src/AppBundle/Security/RandomSecurityRobot.php
+diff --git a/src/AppBundle/Security/EvilSecurityRobot.php b/src/AppBundle/Security/EvilSecurityRobot.php
 new file mode 100644
-index 0000000..66afbbf
+index 0000000..3f72c44
 --- /dev/null
-+++ b/src/AppBundle/Security/RandomSecurityRobot.php
++++ b/src/AppBundle/Security/EvilSecurityRobot.php
 @@ -0,0 +1,11 @@
 +<?php
 +
 +namespace AppBundle\Security;
 +
-+class RandomSecurityRobot
++class EvilSecurityRobot
 +{
 +    public function doesRobotAllowAccess()
 +    {
@@ -16,7 +16,7 @@ index 0000000..66afbbf
 +    }
 +}
 diff --git a/src/AppBundle/Security/WeirdFormAuthenticator.php b/src/AppBundle/Security/WeirdFormAuthenticator.php
-index f00dd2c..110a3b0 100644
+index f00dd2c..04662c5 100644
 --- a/src/AppBundle/Security/WeirdFormAuthenticator.php
 +++ b/src/AppBundle/Security/WeirdFormAuthenticator.php
 @@ -20,11 +20,13 @@ class WeirdFormAuthenticator extends AbstractGuardAuthenticator
@@ -26,7 +26,7 @@ index f00dd2c..110a3b0 100644
 +    private $robot;
  
 -    public function __construct(EntityManager $em, RouterInterface $router)
-+    public function __construct(EntityManager $em, RouterInterface $router, RandomSecurityRobot $robot)
++    public function __construct(EntityManager $em, RouterInterface $router, EvilSecurityRobot $robot)
      {
          $this->em = $em;
          $this->router = $router;
