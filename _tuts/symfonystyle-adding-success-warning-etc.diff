@@ -1,0 +1,16 @@
+diff --git a/src/AppBundle/Command/StylesPlayCommand.php b/src/AppBundle/Command/StylesPlayCommand.php
+index 0aa4fae..3ab1819 100644
+--- a/src/AppBundle/Command/StylesPlayCommand.php
++++ b/src/AppBundle/Command/StylesPlayCommand.php
+@@ -24,5 +24,11 @@ class StylesPlayCommand extends ContainerAwareCommand
+         $style->note('Make sure you write some *real* text eventually');
+         $style->comment('Lorem ipsum is just Latin garbage');
+         $style->comment('So don\'t overuse it');
++
++        $style->section('How about some BIG messages?');
++        $style->success('I <3 lorem ipsum');
++        $style->warning('You should *maybe* not use Lorem ipsum');
++        $style->error('You should stop using lorem ipsum');
++        $style->caution('STOP USING IT SRSLY!');
+     }
+ }

@@ -1,0 +1,27 @@
+diff --git a/src/AppBundle/Command/StylesPlayCommand.php b/src/AppBundle/Command/StylesPlayCommand.php
+new file mode 100644
+index 0000000..938a2cb
+--- /dev/null
++++ b/src/AppBundle/Command/StylesPlayCommand.php
+@@ -0,0 +1,21 @@
++<?php
++
++namespace AppBundle\Command;
++
++use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
++use Symfony\Component\Console\Input\InputInterface;
++use Symfony\Component\Console\Output\OutputInterface;
++
++class StylesPlayCommand extends ContainerAwareCommand
++{
++    protected function configure()
++    {
++        $this
++            ->setName('styles:play');
++    }
++
++    protected function execute(InputInterface $input, OutputInterface $output)
++    {
++        $output->writeln('boring...');
++    }
++}

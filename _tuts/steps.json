@@ -69,7 +69,27 @@
             "id": "form-fill-in-form-type",
             "name": "Form: Fill in form type",
             "description": null
+        },
+        {
+            "id": "symfonystyle-boring-command",
+            "name": "SymfonyStyle: Boring command",
+            "description": null
+        },
+        {
+            "id": "symfonystyle-titles-sections-and-text",
+            "name": "SymfonyStyle: Titles, sections and text",
+            "description": null
+        },
+        {
+            "id": "symfonystyle-adding-success-warning-etc",
+            "name": "SymfonyStyle: Adding success, warning, etc",
+            "description": null
+        },
+        {
+            "id": "symfonystyle-lists",
+            "name": "SymfonyStyle: Lists",
+            "description": null
         }
     ],
-    "sha": "8f0f40d638571c0208da351980b82bbcd0a81c2a"
+    "sha": "32aa714f52cb944269a52c604556961e55f18579"
 }

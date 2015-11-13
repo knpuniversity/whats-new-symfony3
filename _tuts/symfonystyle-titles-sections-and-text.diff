@@ -1,0 +1,26 @@
+diff --git a/src/AppBundle/Command/StylesPlayCommand.php b/src/AppBundle/Command/StylesPlayCommand.php
+index 938a2cb..0aa4fae 100644
+--- a/src/AppBundle/Command/StylesPlayCommand.php
++++ b/src/AppBundle/Command/StylesPlayCommand.php
+@@ -5,6 +5,7 @@ namespace AppBundle\Command;
+ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+ use Symfony\Component\Console\Input\InputInterface;
+ use Symfony\Component\Console\Output\OutputInterface;
++use Symfony\Component\Console\Style\SymfonyStyle;
+ 
+ class StylesPlayCommand extends ContainerAwareCommand
+ {
+@@ -16,6 +17,12 @@ class StylesPlayCommand extends ContainerAwareCommand
+ 
+     protected function execute(InputInterface $input, OutputInterface $output)
+     {
+-        $output->writeln('boring...');
++        $style = new SymfonyStyle($input, $output);
++        $style->title('Welcome to SymfonyStyle');
++        $style->section('Write some basic text');
++        $style->text('Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, ');
++        $style->note('Make sure you write some *real* text eventually');
++        $style->comment('Lorem ipsum is just Latin garbage');
++        $style->comment('So don\'t overuse it');
+     }
+ }

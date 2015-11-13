@@ -1,0 +1,26 @@
+diff --git a/src/AppBundle/Command/StylesPlayCommand.php b/src/AppBundle/Command/StylesPlayCommand.php
+index 3ab1819..fa33ac0 100644
+--- a/src/AppBundle/Command/StylesPlayCommand.php
++++ b/src/AppBundle/Command/StylesPlayCommand.php
+@@ -30,5 +30,21 @@ class StylesPlayCommand extends ContainerAwareCommand
+         $style->warning('You should *maybe* not use Lorem ipsum');
+         $style->error('You should stop using lorem ipsum');
+         $style->caution('STOP USING IT SRSLY!');
++
++        $style->section('Some tables and lists?');
++        $style->table(
++            ['User', 'Birthday'],
++            [
++                ['weaverryan', 'June 5th'],
++                ['leannapelham', 'All February']
++            ]
++        );
++
++        $style->text('Ryan\'s favorite things:');
++        $style->listing([
++            'Running',
++            'Pizza',
++            'Watching Leanna tease Jordi Borgiano'
++        ]);
+     }
+ }
