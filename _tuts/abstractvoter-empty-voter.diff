@@ -1,0 +1,68 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index e43b5ae..a53793d 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -8,3 +8,8 @@ services:
+         class: AppBundle\Security\WeirdFormAuthenticator
+         # arguments: ['@doctrine.orm.entity_manager', '@router']
+         autowire: true
++
++    user_voter:
++        class: AppBundle\Security\UserVoter
++        tags:
++            - { name: security.voter }
+diff --git a/src/AppBundle/Controller/DefaultController.php b/src/AppBundle/Controller/DefaultController.php
+index 2d14bce..f7fc772 100644
+--- a/src/AppBundle/Controller/DefaultController.php
++++ b/src/AppBundle/Controller/DefaultController.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Controller;
+ 
++use AppBundle\Entity\User;
+ use AppBundle\Form\RegistrationForm;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+@@ -56,4 +57,16 @@ class DefaultController extends Controller
+             'form' => $form->createView()
+         ]);
+     }
++
++    /**
++     * @Route("/users/{username}", name="user_view")
++     */
++    public function viewUserAction(User $user)
++    {
++        if (!$this->isGranted('USER_VIEW', $user)) {
++            throw $this->createAccessDeniedException('NO!');
++        }
++
++        dump('Access granted!', $user);die;
++    }
+ }
+diff --git a/src/AppBundle/Security/UserVoter.php b/src/AppBundle/Security/UserVoter.php
+new file mode 100644
+index 0000000..c141bb9
+--- /dev/null
++++ b/src/AppBundle/Security/UserVoter.php
+@@ -0,0 +1,19 @@
++<?php
++
++namespace AppBundle\Security;
++
++use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
++use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
++
++class UserVoter extends AbstractVoter
++{
++    protected function supports($attribute, $object)
++    {
++
++    }
++
++    protected function voteOnAttribute($attribute, $object, TokenInterface $token)
++    {
++        // TODO: Implement voteOnAttribute() method.
++    }
++}
+\ No newline at end of file

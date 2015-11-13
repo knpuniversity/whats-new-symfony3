@@ -1,0 +1,52 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index a53793d..b289ad2 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -11,5 +11,6 @@ services:
+ 
+     user_voter:
+         class: AppBundle\Security\UserVoter
++        autowire: true
+         tags:
+             - { name: security.voter }
+diff --git a/src/AppBundle/Security/UserVoter.php b/src/AppBundle/Security/UserVoter.php
+index c141bb9..c89bda7 100644
+--- a/src/AppBundle/Security/UserVoter.php
++++ b/src/AppBundle/Security/UserVoter.php
+@@ -2,18 +2,34 @@
+ 
+ namespace AppBundle\Security;
+ 
++use AppBundle\Entity\User;
+ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+ use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
+ 
+ class UserVoter extends AbstractVoter
+ {
++    private $robot;
++
++    public function __construct(EvilSecurityRobot $robot)
++    {
++        $this->robot = $robot;
++    }
++
+     protected function supports($attribute, $object)
+     {
++        if ($attribute != 'USER_VIEW') {
++            return false;
++        }
++
++        if (!$object instanceof User) {
++            return false;
++        }
+ 
++        return true;
+     }
+ 
+     protected function voteOnAttribute($attribute, $object, TokenInterface $token)
+     {
+-        // TODO: Implement voteOnAttribute() method.
++        return $this->robot->doesRobotAllowAccess();
+     }
+ }
+\ No newline at end of file

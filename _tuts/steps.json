@@ -89,7 +89,17 @@
             "id": "symfonystyle-lists",
             "name": "SymfonyStyle: Lists",
             "description": null
+        },
+        {
+            "id": "abstractvoter-empty-voter",
+            "name": "AbstractVoter: Empty voter",
+            "description": null
+        },
+        {
+            "id": "abstractvoter-fill-it-in",
+            "name": "AbstractVoter: Fill it in!",
+            "description": null
         }
     ],
-    "sha": "5dd132ab40ac1239255c0892275278db4dd657a6"
+    "sha": "df7cef82f3dbefedbd86ef3439decfc86cd690cf"
 }
