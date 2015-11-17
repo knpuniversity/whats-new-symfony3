@@ -29,7 +29,7 @@ index 5c76fc5..61db6ad 100644
 +        class: AppBundle\Security\WeirdFormAuthenticator
 +        arguments: ['@doctrine.orm.entity_manager', '@router']
 diff --git a/src/AppBundle/Security/WeirdFormAuthenticator.php b/src/AppBundle/Security/WeirdFormAuthenticator.php
-index d21f541..a711c63 100644
+index d21f541..c5975f5 100644
 --- a/src/AppBundle/Security/WeirdFormAuthenticator.php
 +++ b/src/AppBundle/Security/WeirdFormAuthenticator.php
 @@ -2,42 +2,99 @@
@@ -90,15 +90,15 @@ index d21f541..a711c63 100644
      public function checkCredentials($credentials, UserInterface $user)
      {
 +        if ($credentials['password'] != 'symfony3') {
-+            return false;
++            return;
 +        }
 +
 +        if ($credentials['answer'] != 42) {
-+            return false;
++            return;
 +        }
 +
 +        if (!$credentials['terms']) {
-+            return false;
++            return;
 +        }
 +
 +        return true;

@@ -16,7 +16,7 @@ index 0000000..3f72c44
 +    }
 +}
 diff --git a/src/AppBundle/Security/WeirdFormAuthenticator.php b/src/AppBundle/Security/WeirdFormAuthenticator.php
-index f00dd2c..04662c5 100644
+index d9cc842..014fbba 100644
 --- a/src/AppBundle/Security/WeirdFormAuthenticator.php
 +++ b/src/AppBundle/Security/WeirdFormAuthenticator.php
 @@ -20,11 +20,13 @@ class WeirdFormAuthenticator extends AbstractGuardAuthenticator
@@ -45,5 +45,5 @@ index f00dd2c..04662c5 100644
 +        }
 +
          if ($credentials['password'] != 'symfony3') {
-             return false;
+             return;
          }

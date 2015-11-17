@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Security/WeirdFormAuthenticator.php b/src/AppBundle/Security/WeirdFormAuthenticator.php
-index a711c63..f00dd2c 100644
+index c5975f5..d9cc842 100644
 --- a/src/AppBundle/Security/WeirdFormAuthenticator.php
 +++ b/src/AppBundle/Security/WeirdFormAuthenticator.php
 @@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
@@ -25,14 +25,14 @@ index a711c63..f00dd2c 100644
          }
  
          if ($credentials['answer'] != 42) {
--            return false;
+-            return;
 +            throw new CustomUserMessageAuthenticationException(
 +                'Don\'t you read any books?'
 +            );
          }
  
          if (!$credentials['terms']) {
--            return false;
+-            return;
 +            throw new CustomUserMessageAuthenticationException(
 +                'Agree to our terms!!!'
 +            );
