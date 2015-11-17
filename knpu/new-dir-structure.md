@@ -29,7 +29,11 @@ directory. The `bootstrap.php.cache` file also got moved here from `app/`.
 
 ### bin/console
 
-Second, we all know and love `app/console`. Well, that's now `bin/console`.
+Second, we all know and love `app/console`. Well, that's now `bin/console`:
+
+```bash
+bin/console
+```
 
 As a result, the `app/` directory is now *just* configuration code: stuff that we
 can actually modify. All the things we don't normally need to worry about editing -
@@ -48,8 +52,12 @@ So, how can we upgrade *our* project from the old structure to this one? And do 
 
 Actually, no: this new structure has *always* been possible. In fact, open up `AppKernel`.
 The *only* reason the new structure works is because the `getCacheDir()` and `getLogDir()`
-methods have been overridden. If you don't override these, they default to using `cache/`
-and `logs/` in *this* directory: `app/`.
+methods have been overridden:
+
+[[[ code('25b2b4b27f') ]]]
+
+If you don't override these, they default to using `cache/` and `logs/` in *this*
+directory: `app/`.
 
 So in your project, if you override these then... boom! You're using the new directory
 structure. Well, you'll also want to move the `console` file and a few other things.
@@ -63,9 +71,18 @@ you'll need to translate to what that means in your app.
 ## New Tests Paths
 
 There are two other tiny changes: the `tests` directory has been moved out of `AppBundle`
-into the root of the project and `phpunit.xml.dist` also now lives in the root directory.
-That means no more `phpunit -c app`: just run `phpunit` and it'll find the configuration
-file automatically.
+into the root of the project:
+
+[[[ code('6783628b29') ]]]
+
+And `phpunit.xml.dist` also now lives in the root directory. That means no more
+`phpunit -c app`: just run `phpunit`:
+
+```bash
+phpunit
+```
+
+and it'll find the configuration file automatically.
 
 That's it for the new directory structure, you can start using it right now, or leave
 your project alone.

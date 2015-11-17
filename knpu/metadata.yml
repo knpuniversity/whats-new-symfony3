@@ -13,9 +13,10 @@ tuts_hero:
 
 chapters:
     new-dir-structure:
-        is_finished: false
+        video_key: 146033664
     guard-authentication:
-        is_finished: false
+        # video_key: 146042466
+        # is_finished: false
     micro-kernel:
         is_finished: false
     profiler:
