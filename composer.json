@@ -13,17 +13,20 @@
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.0.*@dev",
-        "doctrine/orm": "^2.4.8",
-        "doctrine/doctrine-bundle": "~1.4",
+        "doctrine/orm": "~2.5@dev",
+        "doctrine/doctrine-bundle": "~1.6@dev",
+        "doctrine/doctrine-cache-bundle": "~1.2@dev",
+        "symfony/security-acl": "~3.0@dev",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.7@dev",
         "sensio/distribution-bundle": "~5.0@dev",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "doctrine/doctrine-fixtures-bundle": "^2.2@dev"
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~3.0",
+        "symfony/phpunit-bridge": "~2.7"
     },
     "scripts": {
         "post-install-cmd": [
@@ -56,6 +59,5 @@
         "branch-alias": {
             "dev-master": "3.0-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
