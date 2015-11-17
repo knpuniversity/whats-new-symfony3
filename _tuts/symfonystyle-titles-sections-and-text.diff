@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Command/StylesPlayCommand.php b/src/AppBundle/Command/StylesPlayCommand.php
-index 938a2cb..0aa4fae 100644
+index 938a2cb..a29f48c 100644
 --- a/src/AppBundle/Command/StylesPlayCommand.php
 +++ b/src/AppBundle/Command/StylesPlayCommand.php
 @@ -5,6 +5,7 @@ namespace AppBundle\Command;
@@ -17,7 +17,7 @@ index 938a2cb..0aa4fae 100644
 -        $output->writeln('boring...');
 +        $style = new SymfonyStyle($input, $output);
 +        $style->title('Welcome to SymfonyStyle');
-+        $style->section('Write some basic text');
++        $style->section('Wow, look at this text section');
 +        $style->text('Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, Lorem ipsum dolor, ');
 +        $style->note('Make sure you write some *real* text eventually');
 +        $style->comment('Lorem ipsum is just Latin garbage');
