@@ -51,14 +51,14 @@ index 2a66017..2d14bce 100644
 +    }
  }
 diff --git a/src/AppBundle/Form/RegistrationForm.php b/src/AppBundle/Form/RegistrationForm.php
-index c20bd36..ab52fe4 100644
+index c20bd36..49d91c7 100644
 --- a/src/AppBundle/Form/RegistrationForm.php
 +++ b/src/AppBundle/Form/RegistrationForm.php
 @@ -3,6 +3,7 @@
  namespace AppBundle\Form;
  
  use Symfony\Component\Form\AbstractType;
-+use Symfony\Component\Form\Extension\Core\Type;
++use Symfony\Component\Form\Extension\Core\Type\TextType;
  use Symfony\Component\Form\FormBuilderInterface;
  use Symfony\Component\OptionsResolver\OptionsResolver;
  
@@ -67,7 +67,7 @@ index c20bd36..ab52fe4 100644
      public function buildForm(FormBuilderInterface $builder, array $options)
      {
 -
-+        $builder->add('username', Type\TextType::class);
++        $builder->add('username', TextType::class);
      }
  
      public function configureOptions(OptionsResolver $resolver)
