@@ -89,6 +89,30 @@ of annotations. Really it's the exact same thing, just done inside of PHP instea
 Back in our `LittleKernel` add `$routes->mount('/'.$annotationRoutes)` which says "Yo! Load those into my routes.
 Don't get too excited, this isn't going to work quite yet. But let's refresh anyways to see what's happening.
 
+The first error we get here is "The annotation '@Sensio\Bundle\FrameworkExtraBundle\Configuration\Route' could not
+be loaded". If you work with annotations, then you need ot add one little extra line of code which already exists
+inside of Symfony's normal autoload file `app/autoload` and it's this line here: `AnnotationRegistry::registerLoader`,
+in `tiny.php` instead of using composer's autoloader directly I'm going to load the normal autoload file which
+itself actually loads the composer autoloader then takes care of this annotations thing. 
+
+Refresh and it works! Let's check out the homepage and now the site is failing with "Unknown 'is_granted' function in base.html.twig on line 19". Let's look and see what's happening on line 19 in that file. Our app is choking on
+`is_granted`. This is one of the really cool but tricky things about using the `MicroKernel`. If you're used to having
+ten or twenty bundles then you're used to having all the features of Symfony. But, with the `MicroKernel` you have
+to opt into those. The `is_granted` comes from Symfony's security bundle and if you want to use that you'll have to
+add it into `LittleKernel`. For now, just take that out and refresh again in the browser. 
+
+It works! That's the `MicroKernel` in a nut shell. Add as many bundles as you want and import external files just like
+you saw here with the annotation route. This isn't about putting everything into a single file, it's about starting
+with a single file and then choosing which bundles and configurations make sense for your project. 
+
+Same thing down here, right now I have my framework configuration inside of PHP, but as this project grows I'll eventually
+want to use a yaml file which I could do really easily by using this `$loader` variable over here and telling it
+to import one of the configuration files. 
+
+Finally, for multi-kernel applications things get easier, because it's just really obvious and clean what configuration
+files are loading. We'll cover this in even more detail in the future, but for now play with it and I hope you love it
+as much as I do!
+
 
 
 
