@@ -1,3 +1,48 @@
 # Console Styling
 
-WIP!
+We all love icecream and Symfony's console command ability. We even love
+the ability to add colors, [beer shaped progress bars](http://knpuniversity.com/blog/fun-with-symfonys-console), 
+tables and all kinds of cool stuff.
+
+A little feature snuck into Symfony 2.7 and was improved for Symfony 2.8 and it's called the
+Symfony Style. It's more than just a cool way to dress, it's the twitter bootstrap for styling
+inside of console commands. Not a huge deal, but you need to know about it because it'll make your
+console commands way more awesome with less work. 
+
+Create a new command directory and inside of there I'll take the lazy way and use the `command+option`
+shortcut and make a new command called `StylesPlayCommand`. Give it the name `styles:play`. 
+
+Start like we always do, with `$output->writeln('boring')` what an exciting message. Zip over to the
+terminal and try that out. `./bin/console styles:play`. And there it is in all of its glory. 
+
+Enough with that! That still works, it will always work. Instead, create a new `$style` variable
+set to `new SymfonyStyle()` and pass it `$input` and `$output`. `SymfonyStyle` is from a few friends
+of mine, Kevin Bond & Javier Eguiluz. This dynamic Canadian-Spaniard team sat down and discussed how
+to get a consistently good looking style with the console commands in the entire Symfony ecosphere and
+make it really easy to do. As Javier put it, this is basically the stylesheet for your commands. We can
+just write methods and it's just going to look good. 
+
+Let's look at some of the basics, like `$style->title('');`. We'll want to start this off with something
+big like "Welcome to SymfonyStyle!". Below that put a subtitle `$style->section('Wow, look at this text section');`.
+Below we're going to use a bunch of different methods that just print out text in different ways. Of course,
+the easiest one is going to be `$style->text('')` and I'll add the most famous of quotes "Lorem ipsum dolor"
+and paste that a few times.
+
+In addition to normal text there are a couple of other ones you can do as well, like, `$style->note('')` because
+we're worried about all the lorem ipsums, so we'll remind people to "write some real text eventually". Before
+we go any further let's try this out, because I want you to see how it's rendering these things. 
+
+Over in the terminal run `./bin/console/styles:play` and there it is! Basically it looks like we have an h1 on top,
+followed by an h2 with some nice coloration between the sections. And below our two headers the text is 
+indented by one space which may seem subtle but the idea is that the header will be all the way to the left
+and everything else will be indented by one space including our little note here which has an exclamation point
+and hip color.
+
+Back in the IDE let's look at one more basic style, `$style->comment('Lorem ipsum is just latin garbage');`.
+Follow that with a little command `$style->comment('So don\'t overuse it')`. And make sure the method name
+is correct.
+
+
+
+
+
