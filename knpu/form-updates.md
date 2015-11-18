@@ -78,3 +78,4 @@ the old one.
 Intentionally that is not possible anymore. If you want to replace something in a core type, you need to use a form
 type extension. That's the proper way to plug into the form type system and change whatever you want inside of the core.
 
+This will be one of the biggest changes for people, but fortunately it's mostly superficial. 
