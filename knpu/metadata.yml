@@ -23,7 +23,7 @@ chapters:
         is_finished: false
     autowiring:
         is_finished: false
-    form-changes:
+    form-updates:
         is_finished: false
     console-styling:
         is_finished: false

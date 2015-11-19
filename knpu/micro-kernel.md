@@ -1,118 +1,165 @@
-# MicroKernel
+# Micro Symfony via MicroKernelTrait
 
-How big is Symfony really? And how little can we make it? Typically we start with the
-Symfony Standard Edition, which looks a bit like this with 10 configuration files, 
-a web directory with two front controllers and this general skeleton that has 20 or 30
-files just to begin with. 
+How big is Symfony, really? It's HUGE! I'm kidding. Dude, Symfony is just a bunch
+of little libraries, so we can make it as small or as huge as we want. Most of us
+start with the Standard Edition: it looks basically like this, 10 or so configuration
+files, two front controllers, and some other skeleton files. Probably 20 or 30 files
+to begin with.
 
-A new feature in Symfony 2.8, called the MicroKernel, you can do something different.
-You can build an entire fully functioning framework with 1 file! And grow from there
-when you want to. It's like starting with Silex, except you still have access to all
-the normal Symfony stuff like bundles and creating services in the container. 
+But no more in Symfony 2.8! Ok, the Standard Edition of course still exists, but now
+we have a brand new tool in the arsenal: the `MicroKernelTrait`. You can build a
+Symfony app that's as small as one file, then let it grow from there.
 
-Imagine that instead of this project right now the only thing we have is a `composer.json`
-file and it requires `symfony/symfony` it's the only thing we need. 
+Hey, should we try it?
 
-In the app directory create a new php class called `LittleKernel`. The kernel is the heart
-of your application and it needs to extend the `BaseKernel` class or implement an interface.
+## Basic "Micro" Kernel
 
-Normally, when you extend this you need a `registerBundles` and `registerContainerConfiguration`.
-Instead of doing that we'll use a new trait called `MicroKernelTrait`. As soon as we have this
-the methods that we'll implement are `registerBundles`, `configureRoutes` and `configureContainer`.
+Imagine that we don't have this big project: we *only* have a `composer.json` file
+that requires `symfony/symfony`.
 
-This is cool, the kernel is the heart of your application and what is a Symfony application?
-Well, it's a set of bundles, a set of services in the container and a set of routes and that's it.
-Here we have the exact three methods that we need to define that and we can make it look however
-we want.
+In the app directory, create a new class called `LittleKernel`. The kernel is the
+heart of your application: make it extend the base `Kernel` class.
 
-Let's see if we can get an entire application running in just this one file. In `registerBundles`
-we'll need at least the framework bundle. In `configureContainer` the minimum amount of configuration
-we need is to call `loadFromExtension('framework')` and pass this a secret key, `micr0`. shhhh it's secret.
+Normally, this class *must* implement two abstract methods: `registerBundles()` and
+`registerContainerConfiguration()`. But let's *not* implement those. Instead, use
+the new `MicroKernelTrait`. This implements `registerContainerConfiguration()` *for*
+us. All we need to do is add `registerBundles`, `configureRoutes` and `configureContainer`.
 
-This `loadFromExtension` is the equivalent to having your `config.yml` file with the framework key
-at the root. This is the yaml version of configuration and this `loadFromExtension` is just the same
-thing being done in PHP. 
+Ok, stop! Check this out, it's *really* cool. What *is* an application? Well, it's
+a set of bundles, a collection of services, and a list of routes. And would you
+look at that! We have exactly three methods that define the *three* things that make
+up a framework.
 
-In `configureRoutes` pass the new route Collection builder object which is a new thing for Symfony 2.8.
-And was built to support the MicroKernel. It allows you to build routes in PHP with a really nice interface.
-Let's do that!
+## Single-File Symfony
 
-`$routes->add('/hello/symfony/{version}')`, the second argument is the controller `kernel:helloSymfony`.
-This is the service format of configuring a controller, `kernel` is the name of the service, which will
-point to this class and `helloSymfony` is the name of the method. Finish this off with `public function helloSymfony()`.
-Give it a `$version` argument and say `return new Response('Hi Symfony version'.$version);`. 
+Let's make a real-live app in just this one file. First, register some bundles:
+we only need *one* bundle: `FrameworkBundle`. To configure that bundle, head to
+`configureContainer()`, call `$c->loadFromExtension()`, and pass it `framework` and
+an array of configuration. The only key it *needs* is `secret`. Set it to the top
+secret super cool-kids password: `micr0`.
 
-Look at that we now have a fully functional Symfony application all in one file. The only thing we need now is a
-front controller that boots and runs this and if you want you could put that right at the bottom of this file.
+And guess what? We already know *exactly* how this `loadFromExtension()` works: it's
+the PHP equivalent of having a `config.yml` file with a `framework` key at the root
+and a `secret` key below that. Oh, and yea, you *can* still load YML and XML config
+files, and you probably will. I'll mention that soon.
 
-I'm a minimalist but let's make things a little bit bigger, in the web directory create a new file called
-`tiny.php`. This will basically be our version of an `app.php` or `app_dev.php` file. 
+At this point, this app will *already* work. But let's make a page. In `configureRoutes()`,
+we receive a shiny new `RouteCollectionBuilder` object - *another* new thing for
+Symfony 2.8 that makes adding routes in PHP a lot more fun than it used to be.
 
-Of course we need to start by requiring Composer's autoloader and our `LittleKernel` file which doesn't
-have a namespace so it can't be autoloaded. Now this is just the exact same stuff that you're used to seeing
-inside of `app_dev.php`. In fact, copy this code from `app_dev.php` and paste it into `tiny.php`. Change
-`AppKernel` to `LittleKernel`. I'll autocomplete the request class so that PHPStorm will plug the use statement
-in for us. 
+Add a route with `$routes->add('/hello/symfony/{version}')`. The second argument
+is the controller: pass it `kernel:helloSymfony`. This is the *service* format for
+configuring a controller: `kernel` is the name of the service - that actually points
+to *this* object -  and `helloSymfony` is the name of the method.
 
-Remove the `loadClassCache` to make this even smaller. Here we create the `LittleKernel`, create the `$request`,
-pass the `$request` into the kernel and that's it. This front controller is going to look the same no matter
-what you do. 
+Hey, let's build that:  `public function helloSymfony()`. Give it a `$version` argument
+and say `return new Response('Hi Symfony version '.$version);`. 
 
-Ready? Let's give it a try!
+OMG. That's a fully-functional Symfony app in one file. The only thing we're missing
+is a front controller that boots and runs this guy. To be *really* trendy, we could
+put that code at the bottom of this file. But come on guys - I think we're letting
+this micro-framework fad get to our heads. *Some* structure is a good thing.
 
-Over in the browser add /tiny.php to our URL and when we do we get a terrible error! But wait, looking at this
-error it says "No route found for 'GET'" our application is working! We're using such a small bit of Symfony
-that we don't have the nice exception pages. We could get these if we used the Twig bundle, but even without
-those we still have a functional app even if we don't have nice looking errors. 
+## Adding the Front Controller
 
-Let's try a real page like `/hello/symfony/3` and wow, there it is! 
+Instead, in the web directory, create a new file called `tiny.php`. This will be our
+version of an `app.php` or `app_dev.php` file. 
 
-Okay, let's make this a little bit bigger and see if we can run our existing app through the `MicroKernel`.
-Our existing app has a `DefaultController`, some annotation routes on it and we use Twig to render our
-templates. 
+Start by requiring Composer's autoloader and our `LittleKernel.php`, since it
+isn't configured to be autoloaded. The rest of this file is just the same boring stuff
+we see in `app_dev.php`. In fact, copy the bottom of that file and paste it here.
+Change `AppKernel` to `LittleKernel` and make sure the `Request` class has its `use`
+statement. Remove `loadClassCache()` - a small performance line - to make this *even*
+smaller. We're crazy!
 
-In `LittleKernel` the first thing we'll need to do is instantiate a new `TwigBundle` and a new `SensioFrameworkExtraBundle`
-so we can load annotation routes. To activate Twig we need just a little bit more configuration inside of
-our framework key down here. This is the kind of stuff that you'd already see in your `config.yml`. Drop
-a templating key in here with an engines subkey and then we'll add Twig as an engine. Activate the assets
-subsystem which you can do by just adding `assets` and setting that to an empty array. This makes it possible
-to use the asset function inside of Twig. 
+Ready? Try it!
 
-In `configureRoutes` add the annotation route to the one we already have here, do that with an
-`$annotationRoutes` variable and set it to `$routes->import('')` and inside of there import whatever resource
-you want like a yaml or xml file. In our case we'll import the annotations from a controller. `__DIR__.'/../src/AppBundle/Controller'` the second argument is the type which is typically optional unless you're
-using something crazy like annotations. 
+Over in the browser add ``/tiny.php`` to the URL:
 
-This is equivalent to what you would normally see inside of a yaml file where there is a resource key and a type
-of annotations. Really it's the exact same thing, just done inside of PHP instead. 
+> http://localhost:8000/tiny.php
 
-Back in our `LittleKernel` add `$routes->mount('/'.$annotationRoutes)` which says "Yo! Load those into my routes.
-Don't get too excited, this isn't going to work quite yet. But let's refresh anyways to see what's happening.
+Ah! Hide from the error! Wait, check it out, it says:
 
-The first error we get here is "The annotation '@Sensio\Bundle\FrameworkExtraBundle\Configuration\Route' could not
-be loaded". If you work with annotations, then you need ot add one little extra line of code which already exists
-inside of Symfony's normal autoload file `app/autoload` and it's this line here: `AnnotationRegistry::registerLoader`,
-in `tiny.php` instead of using composer's autoloader directly I'm going to load the normal autoload file which
-itself actually loads the composer autoloader then takes care of this annotations thing. 
+> No route found for GET
 
-Refresh and it works! Let's check out the homepage and now the site is failing with "Unknown 'is_granted' function in base.html.twig on line 19". Let's look and see what's happening on line 19 in that file. Our app is choking on
-`is_granted`. This is one of the really cool but tricky things about using the `MicroKernel`. If you're used to having
-ten or twenty bundles then you're used to having all the features of Symfony. But, with the `MicroKernel` you have
-to opt into those. The `is_granted` comes from Symfony's security bundle and if you want to use that you'll have to
-add it into `LittleKernel`. For now, just take that out and refresh again in the browser. 
+Our app is working! We're using *such* a small bit of Symfony that we don't even have
+the nice exception pages. You can get these back by adding TwigBundle, but it's not
+*technically* necessary.
 
-It works! That's the `MicroKernel` in a nut shell. Add as many bundles as you want and import external files just like
-you saw here with the annotation route. This isn't about putting everything into a single file, it's about starting
-with a single file and then choosing which bundles and configurations make sense for your project. 
+Try the real page now: `/hello/symfony/3`. There it is!
 
-Same thing down here, right now I have my framework configuration inside of PHP, but as this project grows I'll eventually
-want to use a yaml file which I could do really easily by using this `$loader` variable over here and telling it
-to import one of the configuration files. 
+## Creating a Bigger (Micro) App
 
-Finally, for multi-kernel applications things get easier, because it's just really obvious and clean what configuration
-files are loading. We'll cover this in even more detail in the future, but for now play with it and I hope you love it
-as much as I do!
+A real app won't be *just* one file. But the `MicroKernelTrait` allows you to grow
+and opt into whatever features you want. Let's see if we can get our existing app.
+That means loading annotation routes from `DefaultController` and booting Twig to
+render the templates.
 
+In `LittleKernel`, add `TwigBundle` and `SensioFrameworkExtraBundle` to `registerBundles()`.
+To *activate* Twig, we need more configuration under the `framework` key. Add a
+`templating` key with an `engines` sub-key. In there, add `twig` in an array. That
+configuration looks a little "deep", but it's *exactly* what you've always had in
+your `config.yml` file.
 
+Also activate the assets subsystem with an `assets` key set to an empty array. This
+makes it possible to use the `asset()` function in Twig. 
 
+### Loading External Routing Files
 
+Next, we need to load the annotation routes. That's *super* easy.
+
+Create an `$annotationRoutes` variable and set it to `$route->import()`. Now, import
+whatever routing resource you want, like a YAML or XML file. In our case, import
+the annotations from the `Controller` directory with `__DIR__.'/../src/AppBundle/Controller'`.
+Pass `annotation` - the "type" as the second arg.
+
+This should feel familiar too: it's equivalent to importing routes in a YAML file
+with `resource` and `type` keys. Really it's the exact same thing, just done in PHP
+instead. 
+
+Finish this off with `$routes->mount('/'.$annotationRoutes)`. This says "Yo! Load
+these new routes into our system". Don't forget this line, or cool things *won't*
+happen.
+
+We're done! But please, please son't get too excited, it's not going to work quite
+yet. Refresh anyways to see what's happening.
+
+Error!
+
+> The annotation '@Sensio\Bundle\FrameworkExtraBundle\Configuration\Route' could
+> not be loaded
+
+If you work with annotations, then you need one little extra line of code. This line
+already exists inside of Symfony's normal `app/autoload.php` file:
+
+In `tiny.php`, require *this* autoload file. That gives us the annotation line we
+need *and* still initializes Composer's autoloader.
+
+Refresh! It's alive!
+
+Now check out the homepage. It's dead again!
+
+> Unknown 'is_granted' function in base.html.twig on line 19
+
+Open that file and find line 19. Our app is choking on `is_granted()`.
+
+This is one of the best and worst parts of the `MicroKernel`. If you're accustomed
+to having twenty bundles, then you're accustomed to having *all* the features of
+Symfony. But, with the `MicroKernel` you must opt into each feature. The `is_granted()`
+comes from Symfony's SecurityBundle... and we're not using that! If we need it, then
+you'll need to add it to `LittleKernel` and configure your `security.yml` file.
+
+For now, remove `is_granted()` and try again.
+
+It alive... again! That's the `MicroKernelTrait` in a nut shell: add as many bundles as
+you want, configure them and add routing. You *can* still load external routing
+and configuration files, and you should! The point isn't to put *everything* into
+a single file: it's about starting with a single file and then choosing which bundles
+and configurations make sense for your project. 
+
+Right now, I have my `framework` configuration in PHP. But if the project grows,
+I might want to use a YAML file instead. That's no problem. See that `$loader` variable?
+It has an `import()` method on it - use that to import a `config.yml` file and you're
+down. This is the PHP-equivalent to the `imports` line in YAML.
+
+Go play with it: I hope you love it as much as I do!

@@ -1,81 +1,83 @@
-# Form Changes
+# Form Updates
 
-The form system also got some changes in the newest version of Symfony.
-These weren't fundamental changes, but they are definitely interesting.
-Create a registration form so I can show these updates off.
+I know, I know, everyone *loves* it when the form system changes and breaks everything.
+Well, get ready: there are more changes in Symfony 2.8. And first, they're a little
+shocking. But I think you'll like them: it's a debateable step towards simplification.
 
-Go straight to creating a form type with a form directory and inside of
-that use the PhpStorm shortcut to create a `RegistrationForm` which gives
-us this nice skeleton. Interestingly, I want you to get rid of the `getName`
-function at the bottom. This hasn't been needed since Symfony 2.7, so it's
-something you can remove from your projects as you upgrade. This leaves us 
-with `buildForm` and `configureOptions`.
+Let's create a registration form using this mysterious *new* stuff. Add a `Form`
+directory and create a `RegistrationForm` class inside. PhpStorm gives me a nice
+skeleton for the class.... *but* now it has too much. Remove the `getName()` method
+at the bottom. This was always a useless, but required function. But no more! In
+fact, you haven't needed this method since Symfony 2.7... we were just slow to update
+the docs. Sorry!
 
-For the most part though, things look the same. In `configureOptions` call
-`$resolver->setDefaults` and pass it the `data_class` since this is a registration
-form. Set that to `AppBundle\Entity\User` to create a new user class. My user
-only has one field on it, username, which makes this one of the most ridiculously 
-useless registration forms in history. We'll need to add our one field with
-`$builder->add('username')` and here is where things are different. Before I would
-have passed `text` as the second argument here. Now, I'm going to instead type the
-full class name to the class behind the text field type. 
+For the most part, forms look the same. In `configureOptions` call `$resolver->setDefaults()`
+and pass it `data_class` set to `AppBundle\Entity\User`. My super-simple user has
+just *one* field on it: `username`, which makes this one of the most ridiculously 
+useless registration forms in history.
 
-To make things easier I'll use a shortcut to do that. `TextType::class`. Of course
-when we do that we'll need a use statement for the `TextType` and unfortunatley 
-PhpStorm doesn't autocomplete it yet as I type it because there is nothing else
-static on that class. But if you focus here you'll see a little lightbulb that
-allows you to import the class. Or if you're lazy, you can hit `option+enter`
-on a mac and import class will show up and you can grab the one from the Symfony
-form compontent. 
+## Form types as Class Names!
 
-That's big thing number one, no more weird strings, instead we have full class names.
-The downside to this is that this will be a little bit longer, but if you use the
-autocomplete functionality it's really not a big deal. The benefit is that the strings
-like text were really abstract. It wasn't clear to users what that actually referred to.
+Add our one field with `$builder->add('username')`. But stop! Here is where things
+are different. Before I would have passed `text` as the second argument. But now,
+I'm going pass the full class name to the class that's *behind* the `text` field type.
 
-With this we can see that the functionality is coming from this class. We could hold the
-command key and click into it if we wanted to figure out how this particular text type works.
+To make things easier, use a shortcut: `TextType::class`. PhpStorm doesn't auto-complete
+classes when you do this... yet. But if you focus on the class, a lightbulb will
+allow you to import the class. Or hit `option+enter` on Max to bring it up immediately.
+This adds the `use` statement. Using `::class` is new in PHP 5.5... so this change
+won't be much fun unless you can use this. But, you can keep using the old syntax
+until you switch to 3.0... which requires 5.5 anyways.
 
-With this done head into the `DefaultController` to create a new registration page for our form.
-Create a new `registerAction`, set the URL to `/register` and we'll call the route `user_register`.
-Start just like normal with `$form = $this->createForm()` but instead of saying `new registrationForm`
-type `RegistrationForm::type`. Move your cursor back over here, hit `option+enter` and eventually that
-will give you the import class. Oh and change that from `type` to `class` duh!
+Phew! That's big thing number one: instead of weird strings, we have full class names.
+This sucks because... well, this is a little bit more typing. But this is *saweet*
+because a class name is more meaningful than a string like `text`. If this was your
+first time using Symfony, you'd have a better chance of understanding how things work.
+And I really like that.
 
-The important thing is that when I imported it that added the use statement up top for our registration form.
-Not only do we not use strings anymore you also don't pass it objects, you only ever pass it the class name.
-A result of this is that the registration form is going to be created and passed no constructor arguments. So,
-you can't have a construct funtion to your registration form anymore. 
+## Create your Form: Still a Class Name
 
-If you need to pass something to your registration form to configure it or some objects that it actually needs
-you can pass it in through the `$options` which would be the third argument when you actually create a
-form class. Or you still can of course register your form type as a service. That's the real answer if you had
-a form like `registrationForm` and it needed some outside dependencies you can still have a construct funtion.
-But then you would need to register it as a service and tag it with `form.type`. 
+Time to use this! Open `DefaultController` and create a new `registerAction`. Set
+the URL to `/register` call it `user_register`. Now, start just like normal with:
+`$form = $this->createForm()`. But stop! I know you *want* to say `new RegistrationForm()`.
+Instead, type `RegistrationForm::type`. Then, move your cursor to the class, hit
+`option+enter` and import the class.  Oh and change `type` to `class`, duh! Importing
+the class added the `use` statement on top.
 
-Add the `$request` as an argument and then add the normal `$form->handleRequest($request)`. `if ($form->isValid())`
-for now just `dump($form->getData());` and put a die statement at the end. 
+So wow, not only do we *not* use magic strings anymore, we also *never* pass objects.
+It's perfectly consistent: we *always* refer to forms and fields using the full class
+name. There's an important consequence: the `RegistrationForm` will be created and
+passed *no* constructor arguments.
 
-Finally, at the bottom `return $this->render('default/register.html.twig')` to render the twig template.
-And we'll pass it our form with `'form' => $form->createView(),`. Simple enough! 
+## Form Type Constructor Args?
 
-In `app/resources/views/default` create the `register.html.twig` file to go with our return. Make this new file
-extend `base.html.twig`, add in the block body tags, an h1 of "You should signup!" and now I'll render the form
-in as lazy of a way as I can think of with `{{form_start(form)}}`, `{{form_end(form)}}`, to render all the fields
-at once plug in `{{form_widget(form)}}` and manually add a submit button with a few bootstrap classes to make it
-look nice. 
+If you need to pass something to that object, you have two options - neither of which
+are new. First, you can pass stuff through the `$options` array: the third argument
+to `createForm()`. Second, you can still - like always - register your form type
+as a service. If `RegistrationForm` has constructor args, that's the real answer:
+register it as a service and tag it with `form.type`. You'll *still* refer to it
+via the class name, but Symfony will use your service instead of creating a new object.
 
-Let's try out our form handywork! Back in the browser head to the /register page, throw in our username of `leannapelham`
-and hit register. There's our dump!
+Add `$request` as an argument and then add the normal `$form->handleRequest($request)`.
+`if ($form->isValid())`, for now `dump($form->getData());` and put a die statement
+to celebrate.
 
-Moral of the story, forms work exactly as they did before. But now, form classes are always the string class name. 
-Never objects, never the weird little formatted text type thing. 
+Finally, at the bottom, `return $this->render('default/register.html.twig')`. Pass
+it the form with `'form' => $form->createView(),`. Simple enough and the same as
+always!
 
-A corallary to this if you think about it enough is that you can no longer replace custom form field types. For example,
-before there was a text type and if you registered a new service and aliased your type with text type it would replace
-the old one. 
+In `app/Resources/views/default`, create that `register.html.twig` template. I'll
+copy in some boilerplate code for this form: none of this has changed. This opens
+the form tag, dumps out all the fields, adds a submit button and closes the form.
 
-Intentionally that is not possible anymore. If you want to replace something in a core type, you need to use a form
-type extension. That's the proper way to plug into the form type system and change whatever you want inside of the core.
+Time to test it! Head to `/register`, throw in our username: `leannapelham` and hit
+register. There's our dump!
 
-This will be one of the biggest changes for people, but fortunately it's mostly superficial. 
+Here's the moral of the story: forms work exactly like before. But now, form classes
+are *always* referred to by their class name: never objects and never the short, but
+weird magic string from the past.
+
+This might be the biggest change in Symfony 3 that people will complain about, and
+rightly so: if you have a lot of forms, this is a lot of changes. For that, check
+out the [Symfony Upgrade Fixer](https://github.com/umpirsky/Symfony-Upgrade-Fixer):
+a library that can automate some of the tasks of upgrading, including this one.

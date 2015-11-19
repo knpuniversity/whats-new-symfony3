@@ -1,48 +1,58 @@
 # Console Styling
 
-We all love icecream and Symfony's console command ability. We even love
-the ability to add colors, [beer shaped progress bars](http://knpuniversity.com/blog/fun-with-symfonys-console), 
-tables and all kinds of cool stuff.
+We all love ice cream and Symfony's console. We love the ability to add colors,
+[beer shaped progress bars](http://knpuniversity.com/blog/fun-with-symfonys-console), 
+tables and a bunch of other cool stuff.
 
-A little feature snuck into Symfony 2.7 and was improved for Symfony 2.8 and it's called the
-Symfony Style. It's more than just a cool way to dress, it's the twitter bootstrap for styling
-inside of console commands. Not a huge deal, but you need to know about it because it'll make your
-console commands way more awesome with less work. 
+A little feature snuck into Symfony 2.7 and was improved in Symfony 2.8. It's called
+the `SymfonyStyle`. It's more than just a cool way to dress, it's the Twitter Bootstrap
+for styling console commands. Ok ok, it's not a huge deal, but let's face it, that
+blog post with the beer icon in the console? It's pretty much our most popular blog
+post... so clearly you guys love this stuff.
 
-Create a new command directory and inside of there I'll take the lazy way and use the `command+option`
-shortcut and make a new command called `StylesPlayCommand`. Give it the name `styles:play`. 
+Create a new `Command` directory. Inside, I'll take the lazy way road and have PhpStorm
+make me a new command called `StylesPlayCommand`. Give it a name! `styles:play`. 
 
-Start like we always do, with `$output->writeln('boring')` what an exciting message. Zip over to the
-terminal and try that out. `./bin/console styles:play`. And there it is in all of its glory. 
+Start like we always do, with lame, worn-out `$output->writeln('boring')`. Zip over
+to the terminal and try that out:
 
-Enough with that! That still works, it will always work. Instead, create a new `$style` variable
-set to `new SymfonyStyle()` and pass it `$input` and `$output`. `SymfonyStyle` is from a few friends
-of mine, Kevin Bond & Javier Eguiluz. This dynamic Canadian-Spaniard team sat down and discussed how
-to get a consistently good looking style with the console commands in the entire Symfony ecosphere and
-make it really easy to do. As Javier put it, this is basically the stylesheet for your commands. We can
-just write methods and it's just going to look good. 
+```bash
+bin/console styles:play
+```
 
-Let's look at some of the basics, like `$style->title('');`. We'll want to start this off with something
-big like "Welcome to SymfonyStyle!". Below that put a subtitle `$style->section('Wow, look at this text section');`.
-Below we're going to use a bunch of different methods that just print out text in different ways. Of course,
-the easiest one is going to be `$style->text('')` and I'll add the most famous of quotes "Lorem ipsum dolor"
-and paste that a few times.
+And there it is! In all its white text on a black background glory.
 
-In addition to normal text there are a couple of other ones you can do as well, like, `$style->note('')` because
-we're worried about all the lorem ipsums, so we'll remind people to "write some real text eventually". Before
-we go any further let's try this out, because I want you to see how it's rendering these things. 
+## Introducing SymfonyStyle
 
-Over in the terminal run `./bin/console/styles:play` and there it is! Basically it looks like we have an h1 on top,
-followed by an h2 with some nice coloration between the sections. And below our two headers the text is 
-indented by one space which may seem subtle but the idea is that the header will be all the way to the left
-and everything else will be indented by one space including our little note here which has an exclamation point
-and hip color.
+Enough of that! That still works, it will always work. But now, create a new `$style`
+variable set to `new SymfonyStyle()`. Pass it the `$input` and `$output`. This class
+comes from a few friends of mine, [Kevin Bond](https://twitter.com/zenstruck) &
+[Javier Eguiluz](https://twitter.com/javiereguiluz). This dynamic Canadian-Spaniard
+team sat down and designed a good-looking style guide that can be used for all commands
+in the Symfony ecosystem. As Javier put it, this is basically the stylesheet for
+your commands. We use simple methods, and Javier makes sure it looks good. Thanks
+Javier!
 
-Back in the IDE let's look at one more basic style, `$style->comment('Lorem ipsum is just latin garbage');`.
-Follow that with a little command `$style->comment('So don\'t overuse it')`. And make sure the method name
-is correct.
+Ok, let's take this for a test drive. First, we need a big title:
+`$style->title('Welcome to SymfonyStyle!')` and then a sub-header with
+`$style->section('Wow, look at this text section');`. To print out normal text, use
+`$style->text()`. I'll quote all demo pages on the Internet by saying "Lorem Ipsum Dolor"...
+a bunch of times.
 
+Because we're worried about all these lorem ipsums, use `$style->note('')` to remind
+people to "write some real text eventually". Let's try it! Run:
 
+```bash
+bin/console styles:play
+```
 
+OooOOooooOOO. Without doing anything, Javier gives us the console equivalent of
+`h1` and `h2` tags, with colors and separation. Below, it's subtle, but all the text
+lines are indented with one space to make them stand out. The note starts with an
+exclamation point and uses a hip color.
 
+Get the idea?
 
+Back on the command, add one more text line:
+`$style->comment('Lorem ipsum is just latin garbage');`. Follow that with
+`$style->comment('So don\'t overuse it')`. Make sure the method name is correct.
