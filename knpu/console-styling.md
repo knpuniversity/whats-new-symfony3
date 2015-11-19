@@ -40,7 +40,39 @@ and hip color.
 
 Back in the IDE let's look at one more basic style, `$style->comment('Lorem ipsum is just latin garbage');`.
 Follow that with a little command `$style->comment('So don\'t overuse it')`. And make sure the method name
-is correct.
+is correct. 
+
+Let's run this again in the terminal, and we see that our comments show up with the one space and the //. 
+So, it may not be that big of a deal, but it's cool that you can call these methods and have styling
+happen. 
+
+Time to take the fancy up a notch, enter down to another section and add `$style->section('How about some BIG messages?');`.
+There are options in here to display messages that emphasize "things are great!", "things are terrible! or "caution".
+Let's start with `$style->success('I <3 lorem ipsum');`. I can't wait let's go see how this looks in the 
+terminal. Look at that nice big green message, it just feels like a celebration!
+
+Ok, maybe we don't love lorem ipsum so we'll send a warning with `$style->warning('You should maybe not use lorem ipsum');`
+Let's see how this one renders in the terminal. Wow, check out that sweet red message - you've been warned.
+
+Seriously guys, enough with the latin. Let's try `$style->error('You should stop using lorem ipsum');`. And
+let's throw in one last word of caution, `$style->caution('Stop using it seriously!');`. When we run this, 
+we've got four blocks all styled for their meaning with nice spacing, coloration and margin. 
+
+There are a few other things that we could do with styling, like a progress bar and a few items to help with
+lists. Let's take a look at those with a new `$style->section('Some tables and lists?');`. Let's start with
+the table. There's already ways to make tables inside of the console, but style has a shortcut for this. 
+`$style->table()`, the first argument to this will be the headers, `['User', 'Birthday'],` and the second argument
+is the rows. So we'll plug in an important birthday to remember, `['weaverryan','June 5th']` and an even
+more important one to remember, `['leannapelham','All of February']`. Let's see how this renders in the terminal.
+
+Wow, look at that nice table, nice spacing and styled headers. Of course you could do this all yourself, but why
+when this does it for you without any effort.
+
+Let's wrap this up by listing out a few of my favorite things, kind of like an Oprah list. 
+`$style->text('Ryan\'s my favorite things')` with a nicely styled list. `$style->listing([])`, this is just an array 
+which you can think of as an unordered list. Let's see, I like `['Running', 'Pizza', 'Watching Leanna tease Jordi Boggiano',]`. Ok last run in the terminal, check out that awesome list. 
+
+There you have it, the SymfonyStyle - enjoy!
 
 
 
