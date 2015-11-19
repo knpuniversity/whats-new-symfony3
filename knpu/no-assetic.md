@@ -1,3 +1,0 @@
-# No Assetic
-
-WIP

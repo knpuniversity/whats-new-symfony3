@@ -56,3 +56,71 @@ Get the idea?
 Back on the command, add one more text line:
 `$style->comment('Lorem ipsum is just latin garbage');`. Follow that with
 `$style->comment('So don\'t overuse it')`. Make sure the method name is correct.
+
+Run it again!
+
+```bash
+bin/console styles:play
+```
+
+More indented text, this time with little bit different styling.
+
+## Success and Error Messages
+
+Time to take the fancy up a notch! Add another section for some BIG messages.
+SymfonyStyle has built-in methods to tell emphasize that "things are great!", "things are terrible!
+or "OMG things are *really* terrible". Start with `$style->success('I <3 lorem ipsum');`.
+Try it!
+
+```bash
+bin/console styles:play
+```
+
+A big ol' nice green message that just screams celebration.
+
+Ok, maybe we don't love lorem ipsum. Send a warning with
+`$style->warning('You should maybe not use lorem ipsum');` Try it!
+
+```bash
+bin/console styles:play
+```
+
+Now we have a menacing red message: you've been warned...
+
+Next, try `$style->error('You should stop using lorem ipsum');`. And throw in one
+last word of caution, `$style->caution('Stop using it seriously!');`. When we run this, 
+we've got four blocks: all styled for their meaning with nice spacing, coloration
+and margin. Thanks Javier!
+
+## Tables and Lists
+
+The `SymfonyStyle` has helpers for a few other things, like progress bars and tables.
+Create a new section: `$style->section('Some tables and lists?');`. Creating tables
+isn't new, but `$style` has a shortcut where Javier styles them for us. Thanks Javier!
+
+Use `$style->table()`. The first argument holds the headers: `['User', 'Birthday'],`
+and the second argument holds the rows. Plug in an important birthday to remember:
+`['weaverryan','June 5th']` and an even *more* important one to remember,
+`['leannapelham','All of February']`. That's right, the celebration for Leanna never
+ends.
+
+So let's see how this renders!
+
+```bash
+bin/console styles:play
+```
+
+Wow, look at that table: nice spacing, nice styled headers. Of course you could do
+this all yourself, but why?
+
+Ok, time for just *one* more: a list of my favorite things:
+`$style->text('Ryan\'s my favorite things')` with a nicely-styled list. Use
+`$style->listing([])`. Pass this an array, which you can think of as an unordered
+list. Let's see, I like `['Running', 'Pizza', 'Watching Leanna tease Jordi Boggiano',]`.
+Ok last run in the terminal!
+
+```bash
+bin/console styles:play
+```
+
+There you have it, the `SymfonyStyle`. Thanks Javier! Seriously, Javier is a cool dude.

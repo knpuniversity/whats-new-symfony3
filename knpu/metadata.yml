@@ -27,7 +27,5 @@ chapters:
         is_finished: false
     console-styling:
         is_finished: false
-    no-assetic:
-        is_finished: false
     abstract-voter:
         is_finished: false
