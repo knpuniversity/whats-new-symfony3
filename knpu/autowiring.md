@@ -30,7 +30,7 @@ Well, frankly, your computer will catch on fire....
 
 I'm kidding! Autowiring won't work, but it *will* throw a clear exception. Autowiring
 is magical... but not completely *magical*: it won't try to guess *which* entity manager
-you want. It's the Symfony-spin in auto-wiring.
+you want. It's the Symfony-spin on auto-wiring.
 
 If you do hit this problem, there is a way for you to tell the container *which*
 service you want to inject for the type-hinted class. 

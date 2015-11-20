@@ -1,7 +1,7 @@
 # Form Updates
 
 I know, I know, everyone *loves* it when the form system changes and breaks everything.
-Well, get ready: there are more changes in Symfony 2.8. And first, they're a little
+Well, get ready: there are more changes in Symfony 2.8. And at first, they're a little
 shocking. But I think you'll like them: it's a debateable step towards simplification.
 
 Let's create a registration form using this mysterious *new* stuff. Add a `Form`
@@ -24,7 +24,7 @@ I'm going pass the full class name to the class that's *behind* the `text` field
 
 To make things easier, use a shortcut: `TextType::class`. PhpStorm doesn't auto-complete
 classes when you do this... yet. But if you focus on the class, a lightbulb will
-allow you to import the class. Or hit `option+enter` on Max to bring it up immediately.
+allow you to import the class. Or hit `option+enter` on a Mac to bring it up immediately.
 This adds the `use` statement. Using `::class` is new in PHP 5.5... so this change
 won't be much fun unless you can use this. But, you can keep using the old syntax
 until you switch to 3.0... which requires 5.5 anyways.
@@ -40,7 +40,7 @@ And I really like that.
 Time to use this! Open `DefaultController` and create a new `registerAction`. Set
 the URL to `/register` call it `user_register`. Now, start just like normal with:
 `$form = $this->createForm()`. But stop! I know you *want* to say `new RegistrationForm()`.
-Instead, type `RegistrationForm::type`. Then, move your cursor to the class, hit
+Instead, type `RegistrationForm::class`. Then, move your cursor to the class, hit
 `option+enter` and import the class.  Oh and change `type` to `class`, duh! Importing
 the class added the `use` statement on top.
 
@@ -81,3 +81,4 @@ This might be the biggest change in Symfony 3 that people will complain about, a
 rightly so: if you have a lot of forms, this is a lot of changes. For that, check
 out the [Symfony Upgrade Fixer](https://github.com/umpirsky/Symfony-Upgrade-Fixer):
 a library that can automate some of the tasks of upgrading, including this one.
+Oh, and it's made by my friend Saša, and he's a really cool dude.

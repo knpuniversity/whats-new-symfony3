@@ -91,9 +91,9 @@ Try the real page now: `/hello/symfony/3`. There it is!
 ## Creating a Bigger (Micro) App
 
 A real app won't be *just* one file. But the `MicroKernelTrait` allows you to grow
-and opt into whatever features you want. Let's see if we can get our existing app.
-That means loading annotation routes from `DefaultController` and booting Twig to
-render the templates.
+and opt into whatever features you want. Let's see if we can get our existing app
+running. That means loading annotation routes from `DefaultController` and booting
+Twig to render the templates.
 
 In `LittleKernel`, add `TwigBundle` and `SensioFrameworkExtraBundle` to `registerBundles()`.
 To *activate* Twig, we need more configuration under the `framework` key. Add a
@@ -117,11 +117,11 @@ This should feel familiar too: it's equivalent to importing routes in a YAML fil
 with `resource` and `type` keys. Really it's the exact same thing, just done in PHP
 instead. 
 
-Finish this off with `$routes->mount('/'.$annotationRoutes)`. This says "Yo! Load
+Finish this off with `$routes->mount('/', $annotationRoutes)`. This says "Yo! Load
 these new routes into our system". Don't forget this line, or cool things *won't*
 happen.
 
-We're done! But please, please son't get too excited, it's not going to work quite
+We're done! But please, please don't get too excited, it's not going to work quite
 yet. Refresh anyways to see what's happening.
 
 Error!
@@ -160,6 +160,6 @@ and configurations make sense for your project.
 Right now, I have my `framework` configuration in PHP. But if the project grows,
 I might want to use a YAML file instead. That's no problem. See that `$loader` variable?
 It has an `import()` method on it - use that to import a `config.yml` file and you're
-down. This is the PHP-equivalent to the `imports` line in YAML.
+done. This is the PHP-equivalent to the `imports` line in YAML.
 
 Go play with it: I hope you love it as much as I do!

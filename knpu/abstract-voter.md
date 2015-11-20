@@ -5,7 +5,7 @@ with a route named `user_view`. Here's the challenge: we need to restrict who is
 to view this page based on some complex business logic. Maybe I can view only *my*
 page... unless I'm an admin... who can view anyone's page. This is a classic situation
 where security isn't global, it's dependent on the object being accessed. I can see
-*my* user page but not *your* use page.
+*my* user page but not *your* user page.
 
 This is the perfect case for voters. I've been talking about these for years... and
 they are *still* underused. Repeat after me, "I do not need ACL, I need voters".
@@ -30,7 +30,7 @@ up `USER_VIEW`.
 Whenever you call `isGranted()`, Symfony asks a set of "voters" whether or not the
 current user should be granted access. One of the default voters handles anything
 that starts with `ROLE_`. And guess what! You can *also* pass an object as a second
-argument to `isGranted()`. That's also passed to the voter.
+argument to `isGranted()`. That's also passed to the voters.
 
 Here's the plan: create a new voter that decides access whenever we pass `USER_VIEW`
 to `isGranted()`.
@@ -41,7 +41,7 @@ In the `Security` directory, create a new class called `UserVoter` and make this
 extend `AbstractVoter`. We added this class *way* back in Symfony 2.6, but we made
 it a lot cooler in Symfony 2.8. 
 
-Use `comand+n` to open the generate menu and select implement methods. The two methods
+Use `command+n` to open the generate menu and select "Implement methods". The two methods
 you need are `supports` and `voteOnAttribute`. This is a little different than before.
 
 Now stop! And go register this as a service. Call it `user_voter` and add its class:
@@ -61,7 +61,7 @@ false. This says: "I don't know, go bother some other voter!".
 
 Add another `if` statement. Wait! Change the argument to `$object` - this *is* the
 object - if any - that's passed to `isGranted()`. Some now-fixed bad PHP-Doc in Symfony
-caused that issue
+caused that issue.
 
 Anyways, `if (!$object instanceof User)`, then also return false: we only vote on
 `User` objects.
@@ -72,7 +72,7 @@ voter per object.
 
 If you return true from `supports()`, then `voteOnAttribute()` is called. This is
 where you shine: do whatever crazy business logic you need to and ultimately return
-tru for access or false to deny access. The `$attribute` and `$object` are the same
+true for access or false to deny access. The `$attribute` and `$object` are the same
 as before and `$token` gives you access to the currently-logged-in user.
 
 Instead of adding real logic, let's let `EvilSecurityRobot` decide our fate. Add

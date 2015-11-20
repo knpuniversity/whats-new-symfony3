@@ -4,7 +4,7 @@ Change the URL back to our *real*, non-micro app:
 
 > http://localhost:8000
 
-We see the same page, but with the sweet black web debug toolbar bar. This is the
+We see the same page, but with the sweet black web debug toolbar. This is the
 same toolbar that you've always known and loved, but redesigned and rethought. That
 means it now has a sleek black interface with flat UI elements, because they're 
 super hip!
@@ -25,7 +25,7 @@ This lists all the previously profiled URLs. So for example, head to
 the `477...` token URL, we'd see all the profiler info from that request.
 
 Why do I love this? It's super handy when you're making API calls or Ajax requests.
-If something goes wrong you want to look into, open a tab, go to `/_profiler` and
+If something goes wrong and you want to look into, open a tab, go to `/_profiler` and
 find that request at the top of this list.
 
 Check it out: go to your editor and open up `DefaultController`. Go down to
@@ -38,7 +38,7 @@ Reload `/login`. There's the error! And there's the dumped variable down in the 
 But what if this wasn't a big beautiful HTML web page but some API endpoint you're
 testing!? Copy the URL, head to the terminal and `curl` the URL. Ah, gross, disgusting,
 horrible - HTML in the terminal! Unless you *love* reading raw HTML, it's tough to
-seee what went wrong. And seeing the dumped variable... well... that's impossible!
+see what went wrong. And seeing the dumped variable... well... that's impossible!
 
 Go back to `/_profiler`. There's our shiny 500 error. Click to get the details. This
 is awesome for two reasons. First, down in the Debug tab, you can see the dumped

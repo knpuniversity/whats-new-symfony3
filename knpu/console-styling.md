@@ -10,7 +10,7 @@ for styling console commands. Ok ok, it's not a huge deal, but let's face it, th
 blog post with the beer icon in the console? It's pretty much our most popular blog
 post... so clearly you guys love this stuff.
 
-Create a new `Command` directory. Inside, I'll take the lazy way road and have PhpStorm
+Create a new `Command` directory. Inside, I'll take the lazy road and have PhpStorm
 make me a new command called `StylesPlayCommand`. Give it a name! `styles:play`. 
 
 Start like we always do, with lame, worn-out `$output->writeln('boring')`. Zip over
@@ -63,12 +63,12 @@ Run it again!
 bin/console styles:play
 ```
 
-More indented text, this time with little bit different styling.
+More indented text, this time with a little bit different styling.
 
 ## Success and Error Messages
 
 Time to take the fancy up a notch! Add another section for some BIG messages.
-SymfonyStyle has built-in methods to tell emphasize that "things are great!", "things are terrible!
+SymfonyStyle has built-in methods to emphasize that "things are great!", "things are terrible!
 or "OMG things are *really* terrible". Start with `$style->success('I <3 lorem ipsum');`.
 Try it!
 
