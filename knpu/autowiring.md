@@ -63,7 +63,7 @@ key to inject the `EvilSecurityRobot`. But wait! Before we do that, we need to r
 the `EvilSecurityRobot` as a service first.
 
 Resist the urge! Instead, do nothing: absolutely nothing. Refresh the page. Fill in
-`weaverryan` and try to login a few times. Bam!
+`weaverryan` and try to login until you se the error. Bam!
 
 > RANDOM SECURITY ROBOT SAYS NO!
 
