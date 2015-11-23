@@ -816,7 +816,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/84eb175dbf638a50ad00aaed5b31238e1b8deb7d",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b980e98ba3908772e3b2a0879440cab454dda37b",
                 "reference": "84eb175dbf638a50ad00aaed5b31238e1b8deb7d",
                 "shasum": ""
             },
@@ -1402,7 +1402,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/84785c4d44801c4dd82829fa2e1820cacfe2c46f",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/7f6af1e1a519d825d8b4baf463746d6e16d4319f",
                 "reference": "84785c4d44801c4dd82829fa2e1820cacfe2c46f",
                 "shasum": ""
             },
@@ -2014,12 +2014,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "9835236a54a8a74a7ddaa637cff65f7d2e3f762d"
+                "reference": "45fe468074201ae2fb34bd91cd25dc2bf6666d5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/9835236a54a8a74a7ddaa637cff65f7d2e3f762d",
-                "reference": "9835236a54a8a74a7ddaa637cff65f7d2e3f762d",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/45fe468074201ae2fb34bd91cd25dc2bf6666d5d",
+                "reference": "45fe468074201ae2fb34bd91cd25dc2bf6666d5d",
                 "shasum": ""
             },
             "require": {
@@ -2137,7 +2137,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-11-16 14:59:01"
+            "time": "2015-11-23 10:41:47"
         },
         {
             "name": "twig/twig",
