@@ -108,18 +108,14 @@ makes it possible to use the `asset()` function in Twig.
 
 Next, we need to load the annotation routes. That's *super* easy.
 
-Create an `$annotationRoutes` variable and set it to `$route->import()`. Now, import
-whatever routing resource you want, like a YAML or XML file. In our case, import
-the annotations from the `Controller` directory with `__DIR__.'/../src/AppBundle/Controller'`.
-Pass `annotation` - the "type" as the second arg.
+Use `$routes->import()`. Pass it whatever routing resource you want, like a YAML
+or XML file. In our case, import the annotations from the `Controller` directory with
+`__DIR__.'/../src/AppBundle/Controller'`. Pass `/` as the second argument - that's
+the prefix - and `annotation` - the "type" - as the last arg.
 
 This should feel familiar too: it's equivalent to importing routes in a YAML file
 with `resource` and `type` keys. Really it's the exact same thing, just done in PHP
-instead. 
-
-Finish this off with `$routes->mount('/', $annotationRoutes)`. This says "Yo! Load
-these new routes into our system". Don't forget this line, or cool things *won't*
-happen.
+instead.
 
 We're done! But please, please don't get too excited, it's not going to work quite
 yet. Refresh anyways to see what's happening.
