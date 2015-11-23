@@ -7,9 +7,7 @@ shocking. But I think you'll like them: it's a debateable step towards simplific
 Let's create a registration form using this mysterious *new* stuff. Add a `Form`
 directory and create a `RegistrationForm` class inside. PhpStorm gives me a nice
 skeleton for the class.... *but* now it has too much. Remove the `getName()` method
-at the bottom. This was always a useless, but required function. But no more! In
-fact, you haven't needed this method since Symfony 2.7... we were just slow to update
-the docs. Sorry!
+at the bottom. This was always a useless, but required function. But no more!
 
 For the most part, forms look the same. In `configureOptions` call `$resolver->setDefaults()`
 and pass it `data_class` set to `AppBundle\Entity\User`. My super-simple user has
