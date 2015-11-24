@@ -21,6 +21,7 @@ chapters:
         is_finished: false
     profiler:
         is_finished: false
+        video_key: 146779246
     autowiring:
         is_finished: false
     form-updates:
