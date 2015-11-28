@@ -5,18 +5,27 @@ super controversial - it's like the celebrity gossip of the Symfony world, right
 along side annotations.
 
 Autowiring makes registering services easier. Normally, a service needs a name, a
-class *and* its constructor arguments. What autowiring says is, "maybe we don't need
-to give it the arguments?". So remove the `arguments` key and instead type `autowire: true`. 
+class *and* its constructor arguments:
+
+[[[ code('aaa35b265c') ]]]
+
+What autowiring says is, "maybe we don't need to give it the arguments?". So remove
+the `arguments` key and instead type `autowire: true`:
+
+[[[ code('6a74406008') ]]]
 
 Head back to the browser, refresh the login page and press the login button. It doesn't
 explode! How was it able to create the `WeirdFormAuthenticator`!!!??? That's autowiring.
 
 ## How does it Work?
 
-It works via typehints. In `WeirdFormAuthenticator` we're type-hinting the first argument 
-with `EntityManager` and the second argument with `RouterInterface`. Behind the scenes,
-well, in a "compiler pass" if you're super geeky and curious, autowiring looks in
-the container and says "could you please show me all the services type-hinted with
+It works via type-hints. In `WeirdFormAuthenticator` we're type-hinting the first argument 
+with `EntityManager` and the second argument with `RouterInterface`:
+
+[[[ code('36e46f3030') ]]]
+
+Behind the scenes, well, in a "compiler pass" if you're super geeky and curious, autowiring
+looks in the container and says "could you please show me all the services type-hinted with
 `EntityManager`?". Since there is only one, it auto-wires that service as the first
 argument.
 
@@ -42,19 +51,25 @@ save time so you can rapidly develop.
 
 Autowiring has one more interesting trick. In the `Security` directory, create a new
 super important class called `EvilSecurityRobot`. Give it one method:
-`public function doesRobotAllowAccess()`. Basically, the evil robot will decide, randomly,
-whether or not we can login. So even if I enter *all* the login fields correctly,
-the evil security robot could still say "NOPE! You're not getting in and I'm not sorry.
-<3 The Evil Robot".
+`public function doesRobotAllowAccess()`:
+
+[[[ code('d10a8a6ff7') ]]]
+
+Basically, the evil robot will decide, randomly, whether or not we can login. So even if
+I enter *all* the login fields correctly, the evil security robot could still say "NOPE!
+You're not getting in and I'm not sorry. <3 The Evil Robot".
 
 The `EvilSecurityRobot` is ready. To use this in `WeirdFormAuthenticator`, pass it
 as the third argument to the constructor: `EvilSecurityRobot $robot`. Now create
-a `$robot` property and set it.
+a `$robot` property and set it:
 
-In `checkCredentials`, `if (!$this->robot->doesRobotAllowAccess())` then throw a
-really clear new `CustomUserMessageAuthenticationException()` that says
+[[[ code('ef5d9ce5c9') ]]]
 
-> RANDOM SECURITY ROBOT SAYS NO!
+In `checkCredentials()`, `if (!$this->robot->doesRobotAllowAccess())` then throw a
+really clear new `CustomUserMessageAuthenticationException()` that says "RANDOM 
+SECURITY ROBOT SAYS NO!":
+
+[[[ code('6c1bfc61bf') ]]]
 
 And I'll even put quotes around that. 
 
