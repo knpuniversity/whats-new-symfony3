@@ -29,16 +29,23 @@ If something goes wrong and you want to look into, open a tab, go to `/_profiler
 find that request at the top of this list.
 
 Check it out: go to your editor and open up `DefaultController`. Go down to
-`sillyLoginAction`. Pretend that something went wrong and we can't figure it out.
+`sillyLoginAction()`. OK, pretend that something went wrong and we can't figure it out.
 If this `security.authentication_utils` is the problem, we might want to use `dump()`
 to print it out. Below that, throw a `new Exception` to simulate something going
-wrong with the helpful message of "Something went wrong!". 
+wrong with the helpful message of "Something went wrong!":
+
+[[[ code('23304309e4') ]]]
 
 Reload `/login`. There's the error! And there's the dumped variable down in the toolbar.
 But what if this wasn't a big beautiful HTML web page but some API endpoint you're
-testing!? Copy the URL, head to the terminal and `curl` the URL. Ah, gross, disgusting,
-horrible - HTML in the terminal! Unless you *love* reading raw HTML, it's tough to
-see what went wrong. And seeing the dumped variable... well... that's impossible!
+testing!? Copy the URL, head to the terminal and `curl` the URL:
+
+```bash
+curl http://localhost:8000/login
+```
+
+Ah, gross, disgusting, horrible - HTML in the terminal! Unless you *love* reading raw HTML,
+it's tough to see what went wrong. And seeing the dumped variable... well... that's impossible!
 
 Go back to `/_profiler`. There's our shiny 500 error. Click to get the details. This
 is awesome for two reasons. First, down in the Debug tab, you can see the dumped
