@@ -167,6 +167,8 @@ Really it's the exact same thing, just done in PHP instead.
 We're done! But please, please don't get too excited, it's not going to work quite
 yet. Refresh anyways to see what's happening.
 
+### Annotations Loader
+
 Error!
 
 > The annotation '@Sensio\Bundle\FrameworkExtraBundle\Configuration\Route' in method
@@ -183,6 +185,8 @@ need *and* still initializes Composer's autoloader:
 [[[ code('71cc6ac3db') ]]]
 
 Refresh! It's alive!
+
+### Opting Into Features
 
 Now check out the homepage. It's dead again!
 
