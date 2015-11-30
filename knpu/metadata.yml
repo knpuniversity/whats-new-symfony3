@@ -18,19 +18,14 @@ chapters:
     guard-authentication:
         video_key: 146042466
     micro-kernel:
-        is_finished: false
         video_key: 146781929
     profiler:
-        is_finished: false
         video_key: 146779246
     autowiring:
-        is_finished: false
         video_key: 146779902
     form-updates:
-        is_finished: false
         video_key: 146781567
     console-styling:
-        is_finished: false
         video_key: 146790931
     abstract-voter:
         is_finished: false
