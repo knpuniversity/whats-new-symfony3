@@ -1,4 +1,4 @@
-# The new AbstractVoter
+# The new Voter Class
 
 Create a new controller - `viewUserAction` - that will live at `/users/{username}`
 with a route named `user_view`. Here's the challenge: we need to restrict who is allowed
