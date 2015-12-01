@@ -10,7 +10,7 @@ index a53793d..b289ad2 100644
          tags:
              - { name: security.voter }
 diff --git a/src/AppBundle/Security/UserVoter.php b/src/AppBundle/Security/UserVoter.php
-index c141bb9..c89bda7 100644
+index f249446..6bf5eb3 100644
 --- a/src/AppBundle/Security/UserVoter.php
 +++ b/src/AppBundle/Security/UserVoter.php
 @@ -2,18 +2,34 @@
@@ -19,9 +19,9 @@ index c141bb9..c89bda7 100644
  
 +use AppBundle\Entity\User;
  use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
- use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
+ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  
- class UserVoter extends AbstractVoter
+ class UserVoter extends Voter
  {
 +    private $robot;
 +

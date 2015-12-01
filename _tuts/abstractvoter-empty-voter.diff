@@ -42,7 +42,7 @@ index 2d14bce..f7fc772 100644
  }
 diff --git a/src/AppBundle/Security/UserVoter.php b/src/AppBundle/Security/UserVoter.php
 new file mode 100644
-index 0000000..c141bb9
+index 0000000..f249446
 --- /dev/null
 +++ b/src/AppBundle/Security/UserVoter.php
 @@ -0,0 +1,19 @@
@@ -51,9 +51,9 @@ index 0000000..c141bb9
 +namespace AppBundle\Security;
 +
 +use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-+use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
++use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 +
-+class UserVoter extends AbstractVoter
++class UserVoter extends Voter
 +{
 +    protected function supports($attribute, $object)
 +    {
