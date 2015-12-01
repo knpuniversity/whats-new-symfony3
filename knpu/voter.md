@@ -38,8 +38,7 @@ to `isGranted()`.
 ## Create the Voter
 
 In the `Security` directory, create a new class called `UserVoter` and make this
-extend `AbstractVoter`. We added this class *way* back in Symfony 2.6, but we made
-it a lot cooler in Symfony 2.8. 
+extend `Voter`. This is a new class in Symfony 2.8 that's easier than the old `AbstractVoter`.
 
 Use `command+n` to open the generate menu and select "Implement methods". The two methods
 you need are `supports` and `voteOnAttribute`. This is a little different than before.
