@@ -46,6 +46,11 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
     },
+    "config": {
+        "platform": {
+            "php": "7.1.3"
+        }
+    },
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
