@@ -22,7 +22,8 @@
         "sensio/distribution-bundle": "~5.0@dev",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "doctrine/doctrine-fixtures-bundle": "^2.3"
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "composer/package-versions-deprecated": "^1.11"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
